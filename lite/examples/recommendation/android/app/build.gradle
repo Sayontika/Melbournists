@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "org.tensorflow.lite.examples.bertapp"
         minSdkVersion 26
@@ -17,12 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    aaptOptions {
-        noCompress "tflite"
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    androidResources {
+        noCompress 'tflite'
+    }
+    lint {
+        abortOnError false
     }
     // If you find lint problem like:
     // * What went wrong:
@@ -31,9 +33,6 @@ android {
     //
     // Probably you haven't set ANDROID_HOME. To fix:
     // export ANDROID_HOME=$HOME/Android/Sdk   # Your Android SDK path.
-    lintOptions {
-      abortOnError false
-    }
 }
 
 // Download TF Lite model with the following script.
